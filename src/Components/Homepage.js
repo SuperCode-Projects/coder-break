@@ -4,22 +4,41 @@ import Counter from "./Counter";
 import Icons from "./Icons";
 import "./homepage.css";
 import Signin from "./Signin";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-console.log(PoseNet);
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 class Homepage extends Component {
   constructor() {
     super();
     this.state = { count: 0, position: "" };
   }
   getPoses = (poses) => {
-    /* console.log(poses[0].keypoints[0].position.x); */
-    console.log(poses[0].keypoints[3].position.y);
-    if (poses[0].keypoints[3].position.y > 273) {
+    if (!poses[0] || !poses[0].keypoints) {
+      return;
+    }
+    const lEye = poses[0].keypoints[1].position;
+    const rEye = poses[0].keypoints[2].position;
+
+    if (lEye.y > rEye.y) {
       console.log("left");
       this.setState({ count: this.state.count + 1 });
     }
-    this.setState({ position: poses[0].keypoints[3].position });
+    if (this.state.count > 10) {
+      this.setState({ count: 10 });
+    }
+
+    /*  const rEar = poses[0].keypoints[4].position;
+      
+    const rShoulder = poses[0].keypoints[6].position;
+    if ((rEar.y = rShoulder.y)) {
+      console.log("right");
+      this.setState({ count: this.state.count + 1 });
+    }
+    if (this.state.count > 10) {
+      this.setState({ count: 10 });
+    } */
+
+    console.log(lEye.y);
+    this.setState({ position: poses[0].keypoints[0].position });
   };
 
   render() {
@@ -39,13 +58,13 @@ class Homepage extends Component {
                   <div
                     id="circleIn"
                     style={{
-                      left: `${this.state.position.x}px `,
+                      left: `${this.state.position.x}px`,
                     }}
                   ></div>
                   <div
                     id="circleOut"
                     style={{
-                      left: `${this.state.position.x}px `,
+                      left: `${this.state.position.y}px`,
                     }}
                   ></div>
                 </div>
