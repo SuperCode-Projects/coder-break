@@ -1,0 +1,10 @@
+.counter {
+  position: absolute;
+  left: 90vw;
+  top: 2vh;
+  width: 6vw;
+  text-align: center;
+  font-size: 4vw;
+  color: white;
+  border: 4px solid white;
+}

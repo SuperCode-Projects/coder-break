@@ -1,9 +1,9 @@
 import React from "react";
-import Homepage from "./coder-break/Homepage";
+import Homepage from "./Components/Homepage";
 import "./App.css";
 function App() {
   return (
-    <div>
+    <div className="body">
       <Homepage />
     </div>
   );
