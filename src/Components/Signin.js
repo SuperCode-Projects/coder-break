@@ -10,6 +10,7 @@ const Signin = ({ link, firstname, lastname }) => {
       <div className="inputs">
         <input type="text" value={firstname} placeholder="Firstname" />
         <input type="text" value={lastname} placeholder="Lastname" />
+
         <Link className="start" to={link}>
           Start
         </Link>
