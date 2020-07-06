@@ -57,7 +57,10 @@ class Arms extends Component {
     return (
       <>
         <PoseNet onEstimate={this.getPoses} className="posenet" />
-        <Counter count={this.state.count} />
+        <Counter
+          countStyle={this.state.count == 0 ? "none" : "block"}
+          count={this.state.count}
+        />
         <Icons
           borderCarm={this.state.count < 1 ? "green" : "yellow"}
           scaleArm={this.state.count < 1 ? `scale(1.5,1.5)` : ``}

@@ -1,5 +1,3 @@
-
-
 .body {
   position: absolute;
   width: 98vw;
@@ -11,5 +9,5 @@
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  filter: blur(3px); 
+  filter: blur(3px);
 }
