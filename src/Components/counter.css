@@ -5,6 +5,22 @@
   width: 6vw;
   text-align: center;
   font-size: 4vw;
-  color: white;
-  border: 4px solid white;
+  -webkit-text-stroke: 2px white;
+  color: transparent;
+  /* border: 4px solid silver; */
+  animation-name: count;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transition: ease-out;
+}
+@keyframes count{
+  0%{opacity: 0;
+  }
+  
+  100%{opacity: 1;
+  font-size: 8vw;
+  text-shadow: 6px 6px 20px white,-6px -6px 20px white;
+  
+  
+}
 }
