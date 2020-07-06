@@ -9,7 +9,7 @@ class Arms extends Component {
     this.state = {
       count: 10,
       position: "",
-      side: "left",
+      side: "up",
     };
   }
 
@@ -17,24 +17,40 @@ class Arms extends Component {
     if (!poses[0] || !poses[0].keypoints) {
       return;
     }
-
-    const lEye = poses[0].keypoints[1].position;
-    const rEye = poses[0].keypoints[2].position;
+    this.setState({ position: poses[0].keypoints[0].position });
+    const lWrist = poses[0].keypoints[9];
+    const rWrist = poses[0].keypoints[10];
+    const lElbow = poses[0].keypoints[7];
+    const rElbow = poses[0].keypoints[8];
 
     if (this.state.count > 0) {
-      if (lEye && rEye) {
-        if (this.state.side === "left") {
-          if (lEye.y - 30 > rEye.y) {
-            this.setState({ count: this.state.count - 1, side: "right" });
+      if (
+        lWrist &&
+        lElbow &&
+        rWrist &&
+        rElbow &&
+        lWrist.position &&
+        lElbow.position &&
+        rWrist.position &&
+        rElbow.position
+      ) {
+        if (this.state.side === "up") {
+          if (
+            lElbow.position.y - 30 > lWrist.position.y ||
+            rElbow.position.y - 30 > rWrist.position.y
+          ) {
+            this.setState({ count: this.state.count - 1, side: "down" });
           }
         } else {
-          if (lEye.y + 30 < rEye.y) {
-            this.setState({ count: this.state.count - 1, side: "left" });
+          if (
+            lElbow.position.y + 30 < lWrist.position.y ||
+            rElbow.position.y + 30 < rWrist.position.y
+          ) {
+            this.setState({ side: "up" });
           }
         }
       }
     }
-    this.setState({ position: poses[0].keypoints[0].position });
   };
 
   render() {
@@ -48,6 +64,7 @@ class Arms extends Component {
         />
         <div id="circles">
           <div
+            src="bat-wing.svg"
             id="circleIn"
             style={{ left: `${this.state.position.x}px` }}
           ></div>
