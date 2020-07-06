@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Icons from "./Icons";
 import PoseNet from "react-posenet";
 import Counter from "./Counter";
+
 import "./homepage.css";
 class Head extends Component {
   constructor() {
