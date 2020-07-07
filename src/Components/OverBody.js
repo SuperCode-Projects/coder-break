@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Icons from "./Icons";
 import PoseNet from "react-posenet";
 import Counter from "./Counter";
+import Head from "./Head";
+import Arms from "./Arms";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./homepage.css";
 class OverBody extends Component {
   constructor() {
@@ -39,24 +42,38 @@ class OverBody extends Component {
 
   render() {
     return (
-      <>
-        <PoseNet onEstimate={this.getPoses} className="posenet" />
-        <Counter count={this.state.count} />
-        <Icons
-          borderCoverBody={this.state.count < 1 ? "green" : "yellow"}
-          scaleOverBody={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
-        />
-        <div id="circles">
-          <div
-            id="circleIn"
-            style={{ left: `${this.state.position.x}px` }}
-          ></div>
-          <div
-            id="circleOut"
-            style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
-          ></div>
-        </div>
-      </>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/overbody">
+            <>
+              <PoseNet onEstimate={this.getPoses} className="posenet" />
+              <Counter count={this.state.count} />
+              <Icons
+                borderCoverBody={this.state.count < 1 ? "green" : "yellow"}
+                scaleOverBody={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
+                armLink="/arms"
+                headLink="/head"
+              />
+              <div id="circles">
+                <div
+                  id="circleIn"
+                  style={{ left: `${this.state.position.x}px` }}
+                ></div>
+                <div
+                  id="circleOut"
+                  style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
+                ></div>
+              </div>
+            </>
+          </Route>
+          <Route path="/arms">
+            <Arms />
+          </Route>
+          <Route path="/head">
+            <Head />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

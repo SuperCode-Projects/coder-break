@@ -3,6 +3,9 @@ import Icons from "./Icons";
 import PoseNet from "react-posenet";
 import Counter from "./Counter";
 import "./homepage.css";
+import Head from "./Head";
+import OverBody from "./OverBody";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 class Arms extends Component {
   constructor() {
     super();
@@ -55,28 +58,42 @@ class Arms extends Component {
 
   render() {
     return (
-      <>
-        <PoseNet onEstimate={this.getPoses} className="posenet" />
-        <Counter
-          countStyle={this.state.count == 0 ? "none" : "block"}
-          count={this.state.count}
-        />
-        <Icons
-          borderCarm={this.state.count < 1 ? "green" : "yellow"}
-          scaleArm={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
-        />
-        <div id="circles">
-          <div
-            src="bat-wing.svg"
-            id="circleIn"
-            style={{ left: `${this.state.position.x}px` }}
-          ></div>
-          <div
-            id="circleOut"
-            style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
-          ></div>
-        </div>
-      </>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/arms">
+            <>
+              <PoseNet onEstimate={this.getPoses} className="posenet" />
+              <Counter
+                countStyle={this.state.count == 0 ? "none" : "block"}
+                count={this.state.count}
+              />
+              <Icons
+                borderCarm={this.state.count < 1 ? "green" : "yellow"}
+                scaleArm={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
+                overbodyLink="/overbody"
+                headLink="/head"
+              />
+              <div id="circles">
+                <div
+                  src="bat-wing.svg"
+                  id="circleIn"
+                  style={{ left: `${this.state.position.x}px` }}
+                ></div>
+                <div
+                  id="circleOut"
+                  style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
+                ></div>
+              </div>
+            </>
+          </Route>
+          <Route path="/head">
+            <Head />
+          </Route>
+          <Route path="/overbody">
+            <OverBody />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

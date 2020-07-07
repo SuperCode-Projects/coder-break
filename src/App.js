@@ -1,11 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Arms from "./Components/Arms";
 import Head from "./Components/Head";
-import OverBody from "./Components/OverBody";
-
 import Signin from "./Components/Signin";
-
 import BackgroundVideo from "./Components/video/vediostreet.mp4";
 
 import "./App.css";
@@ -18,16 +14,10 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Signin link="/overbody" />
+            <Signin link="/head" />
           </Route>
           <Route path="/head">
             <Head />
-          </Route>
-          <Route path="/arms">
-            <Arms />
-          </Route>
-          <Route path="/overbody">
-            <OverBody />
           </Route>
         </Switch>
       </BrowserRouter>

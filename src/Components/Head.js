@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Icons from "./Icons";
 import PoseNet from "react-posenet";
 import Counter from "./Counter";
-
+import Arms from "./Arms";
+import OverBody from "./OverBody";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./homepage.css";
 class Head extends Component {
   constructor() {
@@ -40,27 +42,43 @@ class Head extends Component {
 
   render() {
     return (
-      <>
-        <PoseNet onEstimate={this.getPoses} className="posenet" />
-        <Counter
-          countStyle={this.state.count == 0 ? "none" : "block"}
-          count={this.state.count}
-        />
-        <Icons
-          borderChead={this.state.count < 1 ? "green" : "yellow"}
-          scaleHead={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
-        />
-        <div id="circles">
-          <div
-            id="circleIn"
-            style={{ left: `${this.state.position.x}px` }}
-          ></div>
-          <div
-            id="circleOut"
-            style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
-          ></div>
-        </div>
-      </>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/head">
+            <>
+              <PoseNet onEstimate={this.getPoses} className="posenet" />
+              <Counter
+                countStyle={this.state.count == 0 ? "none" : "block"}
+                count={this.state.count}
+              />
+              <Icons
+                borderChead={this.state.count < 1 ? "green" : "yellow"}
+                scaleHead={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
+                overbodyLink="/overbody"
+                armLink="/arms"
+              />
+
+              <div id="circles">
+                <div
+                  id="circleIn"
+                  style={{ left: `${this.state.position.x}px` }}
+                ></div>
+                <div
+                  id="circleOut"
+                  style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
+                ></div>
+              </div>
+            </>
+          </Route>
+
+          <Route path="/arms">
+            <Arms />
+          </Route>
+          <Route path="/overbody">
+            <OverBody />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
