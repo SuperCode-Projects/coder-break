@@ -1,11 +1,10 @@
 import React from "react";
 import "./counter.css";
-const Counter = ({ count, countStyle }) => {
+const Counter = ({ count, countColor }) => {
   return (
-    <h1
-      style={{ display: `${countStyle}` }}
-      className="counter"
-    >{`${count}`}</h1>
+    <h1 id="counter" style={{ color: countColor }} className="counter">
+      {count}
+    </h1>
   );
 };
 

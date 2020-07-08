@@ -42,14 +42,14 @@ class Arms extends Component {
             lElbow.position.y - 30 > lWrist.position.y ||
             rElbow.position.y - 30 > rWrist.position.y
           ) {
-            this.setState({ count: this.state.count - 1, side: "down" });
+            this.setState({ side: "down" });
           }
         } else {
           if (
             lElbow.position.y + 30 < lWrist.position.y ||
             rElbow.position.y + 30 < rWrist.position.y
           ) {
-            this.setState({ side: "up" });
+            this.setState({ count: this.state.count - 1, side: "up" });
           }
         }
       }
@@ -73,17 +73,6 @@ class Arms extends Component {
                 overbodyLink="/overbody"
                 headLink="/head"
               />
-              <div id="circles">
-                <div
-                  src="bat-wing.svg"
-                  id="circleIn"
-                  style={{ left: `${this.state.position.x}px` }}
-                ></div>
-                <div
-                  id="circleOut"
-                  style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
-                ></div>
-              </div>
             </>
           </Route>
           <Route path="/head">

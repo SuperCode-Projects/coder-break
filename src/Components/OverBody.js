@@ -54,16 +54,6 @@ class OverBody extends Component {
                 armLink="/arms"
                 headLink="/head"
               />
-              <div id="circles">
-                <div
-                  id="circleIn"
-                  style={{ left: `${this.state.position.x}px` }}
-                ></div>
-                <div
-                  id="circleOut"
-                  style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
-                ></div>
-              </div>
             </>
           </Route>
           <Route path="/arms">

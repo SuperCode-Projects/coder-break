@@ -11,6 +11,7 @@ function App() {
       <video id="backgroundVideo" autoPlay loop muted>
         <source src={BackgroundVideo} type="video/mp4" />
       </video>
+
       <BrowserRouter>
         <Switch>
           <Route exact path="/">

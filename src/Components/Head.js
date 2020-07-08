@@ -20,19 +20,34 @@ class Head extends Component {
     if (!poses[0] || !poses[0].keypoints) {
       return;
     }
-
+    const counterId = document.querySelector("#counter");
     const lEye = poses[0].keypoints[1].position;
     const rEye = poses[0].keypoints[2].position;
+    const lEyeX = poses[0].keypoints[1].position.x;
+    const rEyeX = poses[0].keypoints[2].position.x;
+    const lEyeY = poses[0].keypoints[1].position.y;
+    const rEyeY = poses[0].keypoints[2].position.y;
+    const a = Math.round(rEyeX - lEyeX);
+    const b = Math.round(rEyeY - lEyeY);
+    if (a == b) {
+      console.log("hier");
+    }
 
+    console.log("a" + a);
+    console.log("b" + b);
     if (this.state.count > 0) {
       if (lEye && rEye) {
         if (this.state.side === "left") {
           if (lEye.y - 30 > rEye.y) {
+            counterId.classList.add("counterAnimation");
             this.setState({ count: this.state.count - 1, side: "right" });
           }
         } else {
           if (lEye.y + 30 < rEye.y) {
+            counterId.classList.add("counterAnimation");
             this.setState({ count: this.state.count - 1, side: "left" });
+
+            counterId.classList.remove("counterAnimation");
           }
         }
       }
@@ -48,8 +63,10 @@ class Head extends Component {
             <>
               <PoseNet onEstimate={this.getPoses} className="posenet" />
               <Counter
-                countStyle={this.state.count == 0 ? "none" : "block"}
-                count={this.state.count}
+                count={
+                  this.state.count > 0 ? `${this.state.count}` : "Nice Job"
+                }
+                countColor={this.state.count < 1 ? "green" : ""}
               />
               <Icons
                 borderChead={this.state.count < 1 ? "green" : "yellow"}
@@ -57,20 +74,18 @@ class Head extends Component {
                 overbodyLink="/overbody"
                 armLink="/arms"
               />
-
-              <div id="circles">
-                <div
-                  id="circleIn"
-                  style={{ left: `${this.state.position.x}px` }}
-                ></div>
-                <div
-                  id="circleOut"
-                  style={{ left: this.state.side === "left" ? "16vw" : "10vw" }}
-                ></div>
-              </div>
             </>
+            <img
+              style={{ display: `${this.state.count}` < 1 ? "none" : "block" }}
+              id="headImg"
+              src="unnamed.png"
+            />
+            <img
+              style={{ display: `${this.state.count}` < 1 ? "block" : "none" }}
+              id="headImg"
+              src="6Smt.gif"
+            />
           </Route>
-
           <Route path="/arms">
             <Arms />
           </Route>
