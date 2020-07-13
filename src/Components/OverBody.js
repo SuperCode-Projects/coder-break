@@ -11,7 +11,7 @@ class OverBody extends Component {
     super();
     this.state = {
       count: 10,
-      position: "",
+
       side: "left",
     };
   }
@@ -47,8 +47,6 @@ class OverBody extends Component {
         }
       }
     }
-    this.setState({ position: poses[0].keypoints[0].position });
-    console.log(nose.x);
   };
 
   render() {
@@ -61,6 +59,14 @@ class OverBody extends Component {
               <Counter
                 count={this.state.count > 0 ? `${this.state.count}` : "✔"}
                 countColor={this.state.count < 1 ? "green" : ""}
+                einDisplay={
+                  this.state.side == "right"
+                    ? "none"
+                    : this.state.count < 1
+                    ? "none"
+                    : ""
+                }
+                ausDisplay={this.state.side == "left" ? "none" : "block"}
               />
               <Icons
                 borderCoverBody={this.state.count < 1 ? "green" : "transparent"}

@@ -76,6 +76,14 @@ class Head extends Component {
               <Counter
                 count={this.state.count > 0 ? `${this.state.count}` : "✔"}
                 countColor={this.state.count < 1 ? "green" : ""}
+                einDisplay={
+                  this.state.side == "right"
+                    ? "none"
+                    : this.state.count < 1
+                    ? "none"
+                    : ""
+                }
+                ausDisplay={this.state.side == "left" ? "none" : "block"}
               />
               <Icons
                 borderChead={this.state.count < 1 ? "green" : "transparent"}

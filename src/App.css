@@ -8,16 +8,3 @@ body {
   width: 98vw;
   margin: auto;
 }
-
-@media only screen and (max-width: 600px) {
-  body {
-    background-image: url(./Components/image/background.jpg);
-    background-size: cover;
-    /*  background-repeat: no-repeat no-repeat; */
-  }
-  .body {
-    position: absolute;
-    width: 98vw;
-    margin: auto;
-  }
-}

@@ -1,5 +1,6 @@
 import React from "react";
 import "./startPage.css";
+
 import { Link } from "react-router-dom";
 const StartPage = ({ link }) => {
   return (
@@ -18,7 +19,9 @@ const StartPage = ({ link }) => {
         </Link>
         <div id="images">
           <img src="Figur-Kopf-Anim.gif" />
+
           <img src="Figur-oberkörper-Anim.gif" />
+
           <img src="Figur-arme-anim.gif" />
         </div>
       </div>

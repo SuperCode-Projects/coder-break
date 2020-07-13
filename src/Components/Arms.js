@@ -79,9 +79,11 @@ class Arms extends Component {
               <Counter
                 count={this.state.count > 0 ? `${this.state.count}` : "✔"}
                 countColor={this.state.count < 1 ? "green" : ""}
+                einDisplay={" none"}
+                ausDisplay={"none"}
               />
               <Icons
-                borderCarm={this.state.count < 1 ? "green" : "yellow"}
+                borderCarm={this.state.count < 1 ? "green" : "transparent"}
                 overbodyLink="/overbody"
                 headLink="/head"
                 armsDispla="block"
