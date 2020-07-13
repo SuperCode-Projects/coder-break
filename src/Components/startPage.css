@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Fondamento&display=swap");
+
+.startInfo {
+  position: absolute;
+  top: 25vh;
+  left: 25vw;
+  width: 50vw;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  font-family: "Bitter", serif;
+  margin: auto;
+  text-align: center;
+}
+.startInfo p {
+  font-size: 2.4vw;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-shadow: 2px 2px 10px #8ad2ff;
+}
+#images {
+  position: relative;
+  width: 40vw;
+  left: 5vw;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+.logo {
+  color: white;
+  margin-top: 1vh;
+  text-align: center;
+  letter-spacing: 4vw;
+  text-shadow: 4px 4px 6px rgb(0, 0, 0);
+
+  font-size: 7vw;
+  font-family: "Fondamento", cursive;
+}
+
+.startInfo .start {
+  position: relative;
+  top: -4vh;
+  left: 16vw;
+  font-size: 3vw;
+  text-decoration: none;
+  color: white;
+  text-shadow: 3px 3px 2px rgb(0, 0, 0);
+}
+.startInfo img {
+  position: relative;
+  width: 10vw;
+}

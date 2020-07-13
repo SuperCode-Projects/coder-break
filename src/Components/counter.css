@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Fondamento&display=swap");
+.counter {
+  position: relative;
+  text-align: center;
+  font-size: 7vw;
+
+  color: #32698e;
+  font-family: "Fondamento", cursive;
+  margin: 0;
+}
+#counterSpan {
+  width: 10vw;
+  border-radius: 50% 0 50% 0%;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+}
+#counters {
+  position: absolute;
+  left: 23vw;
+  top: 32vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50vw;
+}
+#counters img {
+  width: 19vw;
+}
+
+.counterAnimation {
+  animation-name: count;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  transition: ease-out;
+}
+@keyframes count {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+    font-size: 8vw;
+
+    text-shadow: 6px 6px 20px white, -6px -6px 20px white;
+  }
+  100% {
+  }
+}

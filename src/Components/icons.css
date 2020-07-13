@@ -1,0 +1,24 @@
+.icons {
+  position: relative;
+  top: 65vh;
+  margin: auto;
+  width: 50vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.icons img {
+  margin: 0;
+  width: 15vw;
+  height: 30vh;
+  border: 3px solid transparent;
+  border-radius: 10px;
+}
+/* #armImg {
+  width: 15vw;
+  height: 30vh;
+}
+#overBodyImg {
+  width: 15vw;
+  height: 30vh;
+} */
