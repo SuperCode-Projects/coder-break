@@ -1,19 +1,19 @@
 import React from "react";
 import "./icons.css";
 import { Link } from "react-router-dom";
-import Arms from "./Arms";
-import Head from "./Head";
-import OverBody from "./OverBody";
+
 const Icons = ({
   borderChead,
-  scaleHead,
+
   borderCoverBody,
   borderCarm,
-  scaleOverBody,
-  scaleArm,
+
   headLink,
   overbodyLink,
   armLink,
+  armsDisplay,
+  headDisplay,
+  overbodyDisplay,
 }) => {
   return (
     <>
@@ -22,9 +22,10 @@ const Icons = ({
           <img
             style={{
               borderColor: `${borderChead}`,
-              transform: `${scaleHead}`,
+
+              display: `${headDisplay}`,
             }}
-            src="icons8-head-massage-area-50.png"
+            src="Figur-Kopf-Anim.gif"
             alt="head"
           />
         </Link>
@@ -32,19 +33,22 @@ const Icons = ({
           <img
             style={{
               borderColor: `${borderCoverBody}`,
-              transform: `${scaleOverBody}`,
+
+              display: `${overbodyDisplay}`,
             }}
-            src="icons8-back-massage-area-50.png"
+            id="overBodyImg"
+            src="Figur-oberkörper-Anim.gif"
             alt="overBody"
           />
         </Link>
         <Link to={armLink}>
           <img
+            id="armImg"
             style={{
               borderColor: `${borderCarm}`,
-              transform: `${scaleArm}`,
+              display: `${armsDisplay}`,
             }}
-            src="icons8-arm-massage-area-50.png"
+            src="Figur-arme-anim.gif"
             alt="arms"
           />
         </Link>

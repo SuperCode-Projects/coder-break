@@ -22,7 +22,18 @@ class OverBody extends Component {
     }
 
     const nose = poses[0].keypoints[0].position;
-
+    const audio = document.querySelector("#audio");
+    const relaxMusic = document.querySelector("#relaxMusic");
+    if (this.state.count < 1) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+    if (this.state.count > 1) {
+      relaxMusic.play();
+    } else {
+      relaxMusic.pause();
+    }
     if (this.state.count > 0) {
       if (nose) {
         if (this.state.side === "left") {
@@ -47,13 +58,23 @@ class OverBody extends Component {
           <Route path="/overbody">
             <>
               <PoseNet onEstimate={this.getPoses} className="posenet" />
-              <Counter count={this.state.count} />
+              <Counter
+                count={this.state.count > 0 ? `${this.state.count}` : "✔"}
+                countColor={this.state.count < 1 ? "green" : ""}
+              />
               <Icons
-                borderCoverBody={this.state.count < 1 ? "green" : "yellow"}
-                scaleOverBody={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
+                borderCoverBody={this.state.count < 1 ? "green" : "transparent"}
                 armLink="/arms"
                 headLink="/head"
+                overbodyDispla="block"
+                headDisplay={this.state.count > 0 ? "none" : "block"}
+                armsDisplay={this.state.count > 0 ? "none" : "block"}
               />
+              <audio src="end.mp3" id="audio"></audio>
+              <audio
+                src="2020-02-22_-_Relaxing_Green_Nature_-_David_Fesliyan.mp3"
+                id="relaxMusic"
+              ></audio>
             </>
           </Route>
           <Route path="/arms">

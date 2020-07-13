@@ -11,7 +11,7 @@ class Arms extends Component {
     super();
     this.state = {
       count: 10,
-      position: "",
+
       side: "up",
     };
   }
@@ -20,11 +20,24 @@ class Arms extends Component {
     if (!poses[0] || !poses[0].keypoints) {
       return;
     }
-    this.setState({ position: poses[0].keypoints[0].position });
     const lWrist = poses[0].keypoints[9];
     const rWrist = poses[0].keypoints[10];
     const lElbow = poses[0].keypoints[7];
     const rElbow = poses[0].keypoints[8];
+    const audio = document.querySelector("#audio");
+    const relaxMusic = document.querySelector("#relaxMusic");
+
+    if (this.state.count < 1) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+
+    if (this.state.count > 1) {
+      relaxMusic.play();
+    } else {
+      relaxMusic.pause();
+    }
 
     if (this.state.count > 0) {
       if (
@@ -64,15 +77,22 @@ class Arms extends Component {
             <>
               <PoseNet onEstimate={this.getPoses} className="posenet" />
               <Counter
-                countStyle={this.state.count == 0 ? "none" : "block"}
-                count={this.state.count}
+                count={this.state.count > 0 ? `${this.state.count}` : "✔"}
+                countColor={this.state.count < 1 ? "green" : ""}
               />
               <Icons
                 borderCarm={this.state.count < 1 ? "green" : "yellow"}
-                scaleArm={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
                 overbodyLink="/overbody"
                 headLink="/head"
+                armsDispla="block"
+                headDisplay={this.state.count > 0 ? "none" : "block"}
+                overbodyDisplay={this.state.count > 0 ? "none" : "block"}
               />
+              <audio src="end.mp3" id="audio"></audio>
+              <audio
+                src="2020-02-22_-_Relaxing_Green_Nature_-_David_Fesliyan.mp3"
+                id="relaxMusic"
+              ></audio>
             </>
           </Route>
           <Route path="/head">

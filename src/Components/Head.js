@@ -4,6 +4,7 @@ import PoseNet from "react-posenet";
 import Counter from "./Counter";
 import Arms from "./Arms";
 import OverBody from "./OverBody";
+
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./homepage.css";
 class Head extends Component {
@@ -11,7 +12,9 @@ class Head extends Component {
     super();
     this.state = {
       count: 10,
-      position: "",
+      countL: 10,
+      countR: 10,
+
       side: "left",
     };
   }
@@ -21,38 +24,46 @@ class Head extends Component {
       return;
     }
     const counterId = document.querySelector("#counter");
-    const lEye = poses[0].keypoints[1].position;
-    const rEye = poses[0].keypoints[2].position;
-    const lEyeX = poses[0].keypoints[1].position.x;
-    const rEyeX = poses[0].keypoints[2].position.x;
     const lEyeY = poses[0].keypoints[1].position.y;
     const rEyeY = poses[0].keypoints[2].position.y;
-    const a = Math.round(rEyeX - lEyeX);
-    const b = Math.round(rEyeY - lEyeY);
-    if (a == b) {
-      console.log("hier");
+
+    const audio = document.querySelector("#audio");
+    const relaxMusic = document.querySelector("#relaxMusic");
+    if (this.state.count < 1) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+    if (this.state.count > 1) {
+      relaxMusic.play();
+    } else {
+      relaxMusic.pause();
     }
 
-    console.log("a" + a);
-    console.log("b" + b);
     if (this.state.count > 0) {
-      if (lEye && rEye) {
+      if (lEyeY && rEyeY) {
         if (this.state.side === "left") {
-          if (lEye.y - 30 > rEye.y) {
+          if (lEyeY - 30 > rEyeY) {
             counterId.classList.add("counterAnimation");
-            this.setState({ count: this.state.count - 1, side: "right" });
+            this.setState({ countL: this.state.count - 1, side: "right" });
           }
         } else {
-          if (lEye.y + 30 < rEye.y) {
+          if (lEyeY + 30 < rEyeY) {
             counterId.classList.add("counterAnimation");
-            this.setState({ count: this.state.count - 1, side: "left" });
+            this.setState({ countR: this.state.count - 1, side: "left" });
 
             counterId.classList.remove("counterAnimation");
+          }
+
+          if (
+            this.state.countL < 10 &&
+            this.state.countL == this.state.countR
+          ) {
+            this.setState({ count: this.state.count - 1 });
           }
         }
       }
     }
-    this.setState({ position: poses[0].keypoints[0].position });
   };
 
   render() {
@@ -63,28 +74,24 @@ class Head extends Component {
             <>
               <PoseNet onEstimate={this.getPoses} className="posenet" />
               <Counter
-                count={
-                  this.state.count > 0 ? `${this.state.count}` : "Nice Job"
-                }
+                count={this.state.count > 0 ? `${this.state.count}` : "✔"}
                 countColor={this.state.count < 1 ? "green" : ""}
               />
               <Icons
-                borderChead={this.state.count < 1 ? "green" : "yellow"}
-                scaleHead={this.state.count < 1 ? `scale(1.5,1.5)` : ``}
+                borderChead={this.state.count < 1 ? "green" : "transparent"}
+                scaleHead={this.state.count < 1 ? `scale(1.2,1.2)` : ``}
                 overbodyLink="/overbody"
                 armLink="/arms"
+                headDispla="block"
+                overbodyDisplay={this.state.count > 0 ? "none" : "block"}
+                armsDisplay={this.state.count > 0 ? "none" : "block"}
               />
+              <audio src="end.mp3" id="audio"></audio>
+              <audio
+                src="2020-02-22_-_Relaxing_Green_Nature_-_David_Fesliyan.mp3"
+                id="relaxMusic"
+              ></audio>
             </>
-            <img
-              style={{ display: `${this.state.count}` < 1 ? "none" : "block" }}
-              id="headImg"
-              src="unnamed.png"
-            />
-            <img
-              style={{ display: `${this.state.count}` < 1 ? "block" : "none" }}
-              id="headImg"
-              src="6Smt.gif"
-            />
           </Route>
           <Route path="/arms">
             <Arms />

@@ -1,13 +1,23 @@
+body {
+  background-image: url(./Components/image/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat no-repeat;
+}
 .body {
   position: absolute;
   width: 98vw;
   margin: auto;
 }
-#backgroundVideo {
-  z-index: -1;
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  filter: blur(6px);
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-image: url(./Components/image/background.jpg);
+    background-size: cover;
+    /*  background-repeat: no-repeat no-repeat; */
+  }
+  .body {
+    position: absolute;
+    width: 98vw;
+    margin: auto;
+  }
 }
